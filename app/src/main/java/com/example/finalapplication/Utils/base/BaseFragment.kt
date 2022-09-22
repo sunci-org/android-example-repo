@@ -1,4 +1,4 @@
-package com.example.finalapplication.Utils.base
+package com.example.finalapplication.utils.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,14 +26,19 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         initData()
         handleEvent()
+        bindData()
     }
+
+    abstract fun bindData()
 
     abstract fun handleEvent()
 
-    abstract fun initView()
-
     abstract fun initData()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

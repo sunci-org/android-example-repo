@@ -2,8 +2,9 @@ package com.example.finalapplication.screen.launch
 
 import android.content.Intent
 import androidx.lifecycle.lifecycleScope
-import com.example.finalapplication.Utils.Constant
-import com.example.finalapplication.Utils.base.BaseActivity
+import com.example.finalapplication.utils.Constant
+import com.example.finalapplication.utils.TimeConstant
+import com.example.finalapplication.utils.base.BaseActivity
 import com.example.finalapplication.databinding.ActivityLaunchBinding
 import com.example.finalapplication.screen.login.LoginActivity
 import com.example.finalapplication.screen.main.MainActivity
@@ -15,8 +16,16 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>(ActivityLaunchBinding
     private val launchViewModel: LaunchViewModel by viewModel()
 
     override fun handleEvent() {
+        // TODO("Not yet implemented")
+    }
+
+    override fun initData() {
+        // TODO("Not yet implemented")
+    }
+
+    override fun bindData() {
         lifecycleScope.launch {
-            delay(2000L)
+            delay(TimeConstant.DEALAY_LAUNCH)
             launchViewModel.user.observe(this@LaunchActivity) { user ->
                 if (user == null) {
                     val intent = Intent(this@LaunchActivity, LoginActivity::class.java)
@@ -31,13 +40,5 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>(ActivityLaunchBinding
                 }
             }
         }
-    }
-
-    override fun initData() {
-        // TODO("Not yet implemented")
-    }
-
-    override fun initView() {
-        // TODO("Not yet implemented")
     }
 }

@@ -13,6 +13,8 @@ class Account() : Parcelable {
         this.password = password
     }
 
+    fun validateAccount() = email.isEmpty() || password.isEmpty()
+
     companion object {
         const val password = "password"
         const val email = "email"

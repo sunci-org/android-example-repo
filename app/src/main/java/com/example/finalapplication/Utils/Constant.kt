@@ -1,18 +1,19 @@
-package com.example.finalapplication.Utils
+package com.example.finalapplication.utils
 
 import java.util.*
 
 object Constant {
     const val ERROE_EMAIL_EMPTY = "enter your  email to reset password"
-    const val NO_INTERNET = "Không có kết nối mạng, vui lòng kiểm tra kết nối"
+    const val NO_INTERNET = "No Internet, Please check!!"
     const val ROLE_CLIENT = "client"
     const val ROLE_STAFF = "staff"
-    const val ERROR_ = "Đã xảy ra lỗi vui lòng thử lại sau"
-    const val ERROR_EMAIL_EXTIST = "Tài khoản đã tồn tại"
-    const val ERROR_PASSWORD_SHORT = "Password cần nhiều hơn 8 kí tự"
-    const val ERROR_CONFIRM_PASSWORD = "Confirm password khác password"
-    const val ERROR_ACCOUNT = "Sai tài khoản mật khẩu"
-    const val ERROR_USER = "Chưa đăng nhập"
+    const val MSG_NO_DATA = "No data founded"
+    const val ERROR_ = "Have error, please try late"
+    const val ERROR_EMAIL_EXTIST = "Account Existed"
+    const val ERROR_PASSWORD_SHORT = "Password need more 8 charactor"
+    const val ERROR_CONFIRM_PASSWORD = "Confirm password different password"
+    const val ERROR_ACCOUNT = "Account Incorrect"
+    const val ERROR_USER = "Please Login"
     const val ERROR_NAME_EMPTY = "Name cannot be empty"
     const val ERROR_VALIDATE_MAIL = "Email is not validate"
     const val ERROR_INCORECT_PASSWORD = "Incorrect password"
@@ -20,6 +21,7 @@ object Constant {
     const val MSG_SIGN_IN = "Sign in ...."
     const val MSG_CHECK_MAIL = "Please check your mail to get link reset password"
     const val MSG_UPDATE = "Update..."
+    const val ITEM_PER_PAGE = 10
 }
 
 fun getNewid() = UUID.randomUUID()
