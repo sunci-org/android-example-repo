@@ -1,4 +1,4 @@
-package com.example.finalapplication.Utils.base
+package com.example.finalapplication.utils.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,12 +8,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
-    protected val _isLoading = MutableLiveData<Boolean>()
+    protected val loading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean>
-        get() = _isLoading
-    protected val _errorMessage = MutableLiveData<String>()
+        get() = loading
+    protected val message = MutableLiveData<String>()
     val errorMessage: LiveData<String>
-        get() = _errorMessage
+        get() = message
     private var countLoading = 0
 
     protected fun <T> launchTask(
@@ -27,7 +27,7 @@ open class BaseViewModel : ViewModel() {
     private fun showLoading(isShowLoading: Boolean) {
         if (!isShowLoading) return
         countLoading++
-        if (_isLoading.value != true) _isLoading.value = true
+        if (loading.value != true) loading.value = true
     }
 
     protected fun hideLoading(isShowLoading: Boolean) {
@@ -35,7 +35,7 @@ open class BaseViewModel : ViewModel() {
         countLoading--
         if (countLoading <= 0) {
             countLoading = 0
-            _isLoading.value = false
+            loading.value = false
         }
     }
 }

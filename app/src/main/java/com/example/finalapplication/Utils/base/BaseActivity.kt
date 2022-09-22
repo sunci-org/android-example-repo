@@ -1,4 +1,4 @@
-package com.example.finalapplication.Utils.base
+package com.example.finalapplication.utils.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,14 +16,19 @@ abstract class BaseActivity<VB : ViewBinding>(
         super.onCreate(savedInstanceState)
         _binding = bindingInflater.invoke(layoutInflater)
         setContentView(binding.root)
-        initView()
         initData()
         handleEvent()
+        bindData()
     }
+
+    abstract fun bindData()
 
     abstract fun handleEvent()
 
     abstract fun initData()
 
-    abstract fun initView()
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.finalapplication.Utils
+package com.example.finalapplication.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -7,25 +7,25 @@ import android.os.Build
 
 object NetworkUtils {
     fun isInternetAvailable(context: Context?): Boolean {
+        var isConnected = false
         val connectivityManager =
-            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val capabilities =
                 connectivityManager?.getNetworkCapabilities(connectivityManager.activeNetwork)
             if (capabilities != null) {
                 when {
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                        return true
+                        isConnected = true
                     }
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                        return true
+                        isConnected = true
                     }
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                        return true
+                        isConnected = true
                     }
                 }
             }
-            return false
         } else {
             val wifiNetwork = connectivityManager?.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
             val mobileNetwork = connectivityManager?.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
@@ -33,5 +33,6 @@ object NetworkUtils {
             val isMobileConnected = mobileNetwork?.isConnected
             return isWifiConnected == true || isMobileConnected == true
         }
+        return isConnected
     }
 }

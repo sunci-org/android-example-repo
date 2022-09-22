@@ -5,7 +5,7 @@ import com.example.finalapplication.data.model.User
 import com.example.finalapplication.data.repository.resource.Listenner
 import com.example.finalapplication.data.repository.resource.UserDataSource
 
-class UserRepositoryIpml(val remote: UserDataSource.remote) : UserRepository {
+class UserRepositoryIpml(val remote: UserDataSource.Remote) : UserRepository {
 
     override suspend fun getCurrentUser(listen: Listenner<User>) {
         remote.getCurrentUser(listen)
@@ -34,6 +34,15 @@ class UserRepositoryIpml(val remote: UserDataSource.remote) : UserRepository {
     override suspend fun forgotPassword(eamil: String, listen: Listenner<Boolean>) {
         remote.forgotPassword(eamil, listen)
     }
+
+    override suspend fun getUserByName(
+        name: String,
+        lastIndex: String,
+        listen: Listenner<List<User>>
+    ) {
+        remote.getUserByName(name, lastIndex, listen)
+    }
+
 
     override fun logout() {
         remote.logout()

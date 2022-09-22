@@ -20,4 +20,5 @@
     <string name="logout">Logout</string>
     <string name="message">Messages</string>
     <string name="search">Search</string>
+    <string name="nodata">No data founded</string>
 </resources>
