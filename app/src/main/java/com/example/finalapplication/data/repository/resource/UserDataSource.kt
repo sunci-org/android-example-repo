@@ -6,7 +6,7 @@ import com.example.finalapplication.data.model.User
 interface UserDataSource {
 
     interface Remote {
-        suspend fun getCurrentUser(listen: Listenner<User>)
+        suspend fun getUser(id: String?, listen: Listenner<User>)
         suspend fun loginUser(account: Account, listen: Listenner<Boolean>)
         suspend fun registerUser(user: User, listen: Listenner<Boolean>)
         suspend fun updateProfile(user: User, listen: Listenner<Boolean>)

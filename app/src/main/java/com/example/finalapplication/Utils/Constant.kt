@@ -21,7 +21,7 @@ object Constant {
     const val MSG_SIGN_IN = "Sign in ...."
     const val MSG_CHECK_MAIL = "Please check your mail to get link reset password"
     const val MSG_UPDATE = "Update..."
-    const val ITEM_PER_PAGE = 10
+    const val RECIVER = "cid"
 }
 
 fun getNewid() = UUID.randomUUID()

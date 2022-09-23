@@ -6,6 +6,7 @@ import com.example.finalapplication.data.model.User
 import com.example.finalapplication.data.repository.resource.Listenner
 import com.example.finalapplication.data.repository.resource.UserDataSource
 import com.example.finalapplication.utils.Constant
+import com.example.finalapplication.utils.NumberConstant
 import com.example.finalapplication.utils.getNewid
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -18,12 +19,14 @@ class RemoteUser : UserDataSource.Remote {
     private val database = Firebase.firestore
     private val storage = FirebaseStorage.getInstance().reference
 
-    override suspend fun getCurrentUser(listen: Listenner<User>) {
+    override suspend fun getUser(id: String?, listen: Listenner<User>) {
         val currentUser = auth.currentUser
-        if (currentUser == null) listen.onError(Constant.ERROR_USER)
+        if (currentUser == null && id.isNullOrEmpty()) listen.onError(Constant.ERROR_USER)
         else {
+            val uid = if (id.isNullOrEmpty()) currentUser?.uid
+            else id
             database.collection(User.users)
-                .document(auth.uid.toString())
+                .document(uid.toString())
                 .addSnapshotListener { snapshot, e ->
                     if (e != null) {
                         listen.onError(e.toString())
@@ -142,7 +145,7 @@ class RemoteUser : UserDataSource.Remote {
             .whereEqualTo(User.name, name)
             .orderBy(User.id)
             .whereGreaterThan(User.id, lastIndex)
-            .limit(Constant.ITEM_PER_PAGE.toLong())
+            .limit(NumberConstant.ITEM_PER_PAGE.toLong())
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     listen.onError(error.toString())
