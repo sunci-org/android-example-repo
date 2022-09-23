@@ -13,7 +13,7 @@ class User() : Parcelable {
     var avatar: String? = null
     var phoneNumber: String? = null
     var isOnline: Boolean = false
-    var userAccount: Account? = null
+    var userAccount: Account? = Account()
     var bankAccountName: String? = null
     var bankAccount: String? = null
 
@@ -25,6 +25,11 @@ class User() : Parcelable {
         this.role = role
         this.name = name
         this.userAccount = userAccount
+    }
+
+    fun validateName(): Boolean {
+        if (this.name.isNullOrEmpty()) return false
+        return true
     }
 
     companion object {

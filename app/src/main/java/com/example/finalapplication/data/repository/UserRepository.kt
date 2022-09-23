@@ -5,7 +5,7 @@ import com.example.finalapplication.data.model.User
 import com.example.finalapplication.data.repository.resource.Listenner
 
 interface UserRepository {
-    suspend fun getCurrentUser(listen: Listenner<User>)
+    suspend fun getUser(id: String?, listen: Listenner<User>)
     suspend fun loginUser(account: Account, listen: Listenner<Boolean>)
     suspend fun registerUser(user: User, listen: Listenner<Boolean>)
     suspend fun updateProfile(user: User, listen: Listenner<Boolean>)

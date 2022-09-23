@@ -3,27 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/_10dp">
+    android:layout_marginVertical="@dimen/dp_10">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circle_avatar"
-        android:layout_width="@dimen/_60dp"
-        android:layout_height="@dimen/_60dp"
-        android:layout_marginHorizontal="@dimen/_10dp"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginHorizontal="@dimen/dp_16"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_username"
-        android:layout_width="@dimen/_0dp"
+        android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginStart="@dimen/dp_10"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="User name "
         android:textColor="@color/black"
-        android:textSize="@dimen/size18sp"
+        android:textSize="@dimen/sp_18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/circle_avatar"

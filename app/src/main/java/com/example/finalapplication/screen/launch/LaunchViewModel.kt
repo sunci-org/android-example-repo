@@ -16,7 +16,7 @@ class LaunchViewModel(private val userRepository: UserRepositoryIpml) : BaseView
     init {
         launchTask<User>(
             onRequest = {
-                userRepository.getCurrentUser(object : Listenner<User> {
+                userRepository.getUser(null, object : Listenner<User> {
                     override fun onSuccess(data: User) {
                         _user.value = data
                         hideLoading(true)

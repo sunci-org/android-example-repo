@@ -7,8 +7,8 @@ import com.example.finalapplication.data.repository.resource.UserDataSource
 
 class UserRepositoryIpml(val remote: UserDataSource.Remote) : UserRepository {
 
-    override suspend fun getCurrentUser(listen: Listenner<User>) {
-        remote.getCurrentUser(listen)
+    override suspend fun getUser(id: String?, listen: Listenner<User>) {
+        remote.getUser(id, listen)
     }
 
     override suspend fun loginUser(account: Account, listen: Listenner<Boolean>) {
