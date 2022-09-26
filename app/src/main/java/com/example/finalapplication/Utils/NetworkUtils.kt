@@ -1,38 +1,57 @@
 package com.example.finalapplication.utils
 
+import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
+import android.net.Network
+import android.net.NetworkRequest
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import com.example.finalapplication.databinding.DialogNoInternetBinding
 
-object NetworkUtils {
-    fun isInternetAvailable(context: Context?): Boolean {
-        var isConnected = false
-        val connectivityManager =
-            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val capabilities =
-                connectivityManager?.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if (capabilities != null) {
-                when {
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                        isConnected = true
-                    }
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                        isConnected = true
-                    }
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                        isConnected = true
-                    }
-                }
-            }
-        } else {
-            val wifiNetwork = connectivityManager?.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-            val mobileNetwork = connectivityManager?.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-            val isWifiConnected = wifiNetwork?.isConnected
-            val isMobileConnected = mobileNetwork?.isConnected
-            return isWifiConnected == true || isMobileConnected == true
+class NetworkUtils(private val connectManager: ConnectivityManager) : LiveData<Boolean>() {
+
+    private val connectCallback = object : ConnectivityManager.NetworkCallback() {
+        override fun onAvailable(network: Network) {
+            super.onAvailable(network)
+            postValue(true)
         }
-        return isConnected
+
+        override fun onLost(network: Network) {
+            super.onLost(network)
+            postValue(false)
+        }
+    }
+
+    override fun onActive() {
+        super.onActive()
+        val builder = NetworkRequest.Builder()
+        connectManager.registerNetworkCallback(builder.build(), connectCallback)
+    }
+
+    override fun onInactive() {
+        super.onInactive()
+        connectManager.unregisterNetworkCallback(connectCallback)
+    }
+
+    companion object {
+        fun getDialogNoInternet(
+            context: Context?,
+            layoutInflater: LayoutInflater,
+            view: ViewGroup
+        ): AlertDialog {
+            val dialogNointernet = AlertDialog.Builder(context).create()
+            dialogNointernet.setView(
+                DialogNoInternetBinding.inflate(
+                    layoutInflater,
+                    view,
+                    false
+                ).root
+            )
+            dialogNointernet.setCancelable(false)
+            dialogNointernet.setTitle(Constant.WARNING_)
+            return dialogNointernet
+        }
     }
 }
