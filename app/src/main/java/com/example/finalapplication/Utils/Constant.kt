@@ -3,6 +3,7 @@ package com.example.finalapplication.utils
 import java.util.*
 
 object Constant {
+    const val WARNING_ = "Warning!"
     const val ERROE_EMAIL_EMPTY = "enter your  email to reset password"
     const val NO_INTERNET = "No Internet, Please check!!"
     const val ROLE_CLIENT = "client"
@@ -22,6 +23,7 @@ object Constant {
     const val MSG_CHECK_MAIL = "Please check your mail to get link reset password"
     const val MSG_UPDATE = "Update..."
     const val RECIVER = "cid"
+    const val TYPE_IMAGE = "image/*"
 }
 
 fun getNewid() = UUID.randomUUID()
