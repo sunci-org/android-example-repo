@@ -3,11 +3,11 @@ package com.example.finalapplication.screen.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.finalapplication.data.model.User
-import com.example.finalapplication.data.repository.UserRepositoryIpml
+import com.example.finalapplication.data.repository.UserRepository
 import com.example.finalapplication.data.repository.resource.Listenner
 import com.example.finalapplication.utils.base.BaseViewModel
 
-class SearchViewModel(private val userRepository: UserRepositoryIpml) : BaseViewModel() {
+class SearchViewModel(private val userRepository: UserRepository) : BaseViewModel() {
     private val _users = MutableLiveData<List<User>>()
     val users: LiveData<List<User>>
         get() = _users

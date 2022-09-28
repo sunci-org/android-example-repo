@@ -1,11 +1,13 @@
 package com.example.finalapplication.data.model
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
+import androidx.recyclerview.widget.DiffUtil
 import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-class Message : Parcelable {
+class Message() : Parcelable {
     var id: String? = null
     var text: String? = null
     var image: String? = null
@@ -16,10 +18,40 @@ class Message : Parcelable {
     var reciverId: String? = null
     var seen: Boolean = false
 
+    constructor(
+        id: String,
+        chatType: String,
+        time: Long,
+        senderId: String,
+        reciverId: String
+    ) : this() {
+        this.id = id
+        this.chatType = chatType
+        this.time = time
+        this.senderId = senderId
+        this.reciverId = reciverId
+    }
+
     companion object {
+        const val messages = "messages"
         const val reciverId = " reciverId"
         const val senderId = "senderId"
         const val seen = "seen"
         const val time = "time"
+        const val chatbox = "chatbox"
+        const val call = "Cuộc gọi thoại"
+        const val video = "Cuộc gọi video"
+        const val image = "Hình ảnh"
+        val diffCallback = object : DiffUtil.ItemCallback<Message>() {
+            override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            @SuppressLint("DiffUtilEquals")
+            override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
+                return oldItem == newItem
+            }
+
+        }
     }
 }
