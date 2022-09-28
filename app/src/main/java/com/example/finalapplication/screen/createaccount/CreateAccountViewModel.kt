@@ -2,13 +2,13 @@ package com.example.finalapplication.screen.createaccount
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.finalapplication.data.model.User
+import com.example.finalapplication.data.repository.UserRepository
+import com.example.finalapplication.data.repository.resource.Listenner
 import com.example.finalapplication.utils.Constant
 import com.example.finalapplication.utils.base.BaseViewModel
-import com.example.finalapplication.data.model.User
-import com.example.finalapplication.data.repository.UserRepositoryIpml
-import com.example.finalapplication.data.repository.resource.Listenner
 
-class CreateAccountViewModel(val userRepository: UserRepositoryIpml) : BaseViewModel() {
+class CreateAccountViewModel(val userRepository: UserRepository) : BaseViewModel() {
 
     private val _isRegisterSuccess = MutableLiveData<Boolean>()
     val isRegisterSuccess: LiveData<Boolean>

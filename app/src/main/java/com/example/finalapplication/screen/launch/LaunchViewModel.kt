@@ -2,12 +2,12 @@ package com.example.finalapplication.screen.launch
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.finalapplication.utils.base.BaseViewModel
 import com.example.finalapplication.data.model.User
-import com.example.finalapplication.data.repository.UserRepositoryIpml
+import com.example.finalapplication.data.repository.UserRepository
 import com.example.finalapplication.data.repository.resource.Listenner
+import com.example.finalapplication.utils.base.BaseViewModel
 
-class LaunchViewModel(private val userRepository: UserRepositoryIpml) : BaseViewModel() {
+class LaunchViewModel(private val userRepository: UserRepository) : BaseViewModel() {
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>

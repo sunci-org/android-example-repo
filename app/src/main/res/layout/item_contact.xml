@@ -22,21 +22,21 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="User name "
-        android:textColor="@color/black"
         android:textSize="@dimen/sp_18"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/text_message"
         app:layout_constraintEnd_toStartOf="@+id/text_time"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/circle_avatar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_message"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="here is message"
+        app:layout_constraintEnd_toStartOf="@id/text_time"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/text_username"
         app:layout_constraintTop_toBottomOf="@+id/text_username" />

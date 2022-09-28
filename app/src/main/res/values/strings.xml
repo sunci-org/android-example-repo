@@ -22,4 +22,5 @@
     <string name="search">Search</string>
     <string name="nodata">No data founded</string>
     <string name="no_internet">No Internet, Please check and try again</string>
+    <string name="enter_message">Enter message...</string>
 </resources>
