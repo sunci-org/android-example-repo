@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iamge_reciver"
+        android:id="@+id/image_receiver"
         android:layout_width="@dimen/dp_800"
         android:layout_height="@dimen/dp_800"
         android:layout_marginHorizontal="@dimen/dp_10"
@@ -29,13 +29,14 @@
         app:layout_constraintTop_toBottomOf="@+id/text_reciver" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/container_call"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_10"
         app:cardBackgroundColor="@color/Green_3A"
         app:cardCornerRadius="@dimen/dp_16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iamge_reciver"
+        app:layout_constraintTop_toBottomOf="@+id/image_receiver"
         app:layout_constraintWidth_percent="0.6">
 
         <LinearLayout
@@ -63,8 +64,10 @@
                     android:textSize="@dimen/sp_20" />
 
                 <TextView
+                    android:id="@+id/text_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
                     android:textSize="@dimen/sp_15" />
             </LinearLayout>
 

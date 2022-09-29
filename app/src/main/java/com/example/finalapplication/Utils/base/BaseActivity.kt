@@ -30,11 +30,6 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     abstract fun initData()
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (currentFocus != null) {
             val inputMethodManager =
@@ -42,5 +37,10 @@ abstract class BaseActivity<VB : ViewBinding>(
             inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

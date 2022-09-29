@@ -24,6 +24,8 @@ object Constant {
     const val MSG_UPDATE = "Update..."
     const val RECIVER = "cid"
     const val TYPE_IMAGE = "image/*"
+    const val EXTENSION_IMAGE = ".jpg"
+    const val PROVIDER = ".provider"
 }
 
 fun getNewid() = UUID.randomUUID()

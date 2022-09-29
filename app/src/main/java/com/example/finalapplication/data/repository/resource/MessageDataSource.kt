@@ -1,5 +1,6 @@
 package com.example.finalapplication.data.repository.resource
 
+import android.net.Uri
 import com.example.finalapplication.data.model.Message
 import com.example.finalapplication.data.model.User
 
@@ -14,7 +15,7 @@ interface MessageDataSource {
 
         suspend fun getHistoryMessage(
             reciverId: String,
-            lastIndex: String,
+            lastIndex: Long,
             listen: Listenner<List<Message>>
         )
     }

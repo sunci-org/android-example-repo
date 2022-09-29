@@ -16,4 +16,8 @@ class ContactRepositoryImpl(private val remote: ContactDataSource.Remote) : Cont
     override fun addNewContact(contact: Contact) {
         // TODO("Not yet implemented")
     }
+
+    override fun updateSeenMessage(id: String?) {
+        remote.updateSeenMessage(id)
+    }
 }

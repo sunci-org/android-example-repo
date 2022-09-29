@@ -51,7 +51,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             this,
             arrayOf(
                 Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
             ),
             REQUEST_CODE_PERMISSION
         )
@@ -67,7 +68,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             applicationContext,
             Manifest.permission.MANAGE_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
-        return readStorge && manageStorge
+        val camera = ActivityCompat.checkSelfPermission(
+            applicationContext,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+        return readStorge && manageStorge && camera
     }
 
     override fun bindData() {

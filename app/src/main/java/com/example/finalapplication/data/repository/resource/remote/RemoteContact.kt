@@ -46,7 +46,7 @@ class RemoteContact : ContactDataSource.Remote {
                     listen.onError(error.toString())
                     return@addSnapshotListener
                 }
-                if (value != null) {
+                if (value != null && value.isEmpty.not()) {
                     val contact = value.documents.first().toObject(Contact::class.java)
                     contact?.let { listen.onSuccess(it) }
                 }
@@ -57,5 +57,11 @@ class RemoteContact : ContactDataSource.Remote {
         database.collection(Contact.contacts)
             .document(contact.id.toString())
             .set(contact)
+    }
+
+    override fun updateSeenMessage(id: String?) {
+        database.collection(Contact.contacts)
+            .document(id.toString())
+            .update(mapOf("${Contact.message}.${Message.seen}" to true))
     }
 }
