@@ -4,12 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
+import com.example.finalapplication.R
 import com.example.finalapplication.data.model.Message
 import com.example.finalapplication.databinding.ItemLoadMoreBinding
 import com.example.finalapplication.databinding.ItemReciveBinding
 import com.example.finalapplication.databinding.ItemSendBinding
 import com.example.finalapplication.utils.base.BaseViewHolder
 import com.example.finalapplication.utils.loadImageByUrl
+import com.example.finalapplication.utils.toDateTime
+import com.example.finalapplication.utils.toTime
 
 class ChatListAdapter(private val revicerid: String) :
     ListAdapter<Message, BaseViewHolder<Any>>(Message.diffCallback) {
@@ -64,19 +67,35 @@ class ChatListAdapter(private val revicerid: String) :
                     binding.apply {
                         containerCall.isVisible = false
                         if (message.text.isNullOrEmpty()) {
+                            imageSend.isVisible = true
                             textSend.isVisible = false
                             imageSend.loadImageByUrl(message.image, binding.root.context)
                         } else {
+                            textSend.isVisible = true
                             imageSend.isVisible = false
                             textSend.text = message.text
                         }
                     }
                 }
                 Message.call -> {
-                    // TODO later
+                    binding.apply {
+                        containerCall.isVisible = true
+                        textSend.isVisible = false
+                        imageSend.isVisible = false
+                        imageCall.setImageResource(R.drawable.ic_baseline_call_24)
+                        textTypeCall.text = Message.call
+                        textTime.text = message.callTime.toTime() + "\n" + message.time.toDateTime()
+                    }
                 }
                 Message.video -> {
-                    // TODO later
+                    binding.apply {
+                        containerCall.isVisible = true
+                        textSend.isVisible = false
+                        imageSend.isVisible = false
+                        imageCall.setImageResource(R.drawable.ic_baseline_videocam_24)
+                        textTypeCall.text = Message.call
+                        textTime.text = message.callTime.toTime() + "\n" + message.time.toDateTime()
+                    }
                 }
             }
         }
@@ -86,7 +105,43 @@ class ChatListAdapter(private val revicerid: String) :
         BaseViewHolder<Any>(binding) {
 
         override fun bind(item: Any) {
-            // TODO later
+            val message = item as Message
+            when (message.chatType) {
+                Message.chatbox -> {
+                    binding.apply {
+                        containerCall.isVisible = false
+                        if (message.text.isNullOrEmpty()) {
+                            imageReceiver.isVisible = true
+                            textReciver.isVisible = false
+                            imageReceiver.loadImageByUrl(message.image, binding.root.context)
+                        } else {
+                            textReciver.isVisible = true
+                            imageReceiver.isVisible = false
+                            textReciver.text = message.text
+                        }
+                    }
+                }
+                Message.call -> {
+                    binding.apply {
+                        containerCall.isVisible = true
+                        textReciver.isVisible = false
+                        imageReceiver.isVisible = false
+                        imageCall.setImageResource(R.drawable.ic_baseline_call_24)
+                        textTypeCall.text = Message.call
+                        textTime.text = message.callTime.toTime() + "\n" + message.time.toDateTime()
+                    }
+                }
+                Message.video -> {
+                    binding.apply {
+                        containerCall.isVisible = true
+                        textReciver.isVisible = false
+                        imageReceiver.isVisible = false
+                        imageCall.setImageResource(R.drawable.ic_baseline_videocam_24)
+                        textTypeCall.text = Message.call
+                        textTime.text = message.callTime.toTime() + "\n" + message.time.toDateTime()
+                    }
+                }
+            }
         }
     }
 

@@ -26,6 +26,7 @@ class HistoryContactFragment :
     private var isEndPage = false
     private var isLoading = false
     private val contacts = mutableListOf<Contact>()
+    private var isCanLoadMore = false
 
     override fun handleEvent() {
         binding.apply {
@@ -37,6 +38,7 @@ class HistoryContactFragment :
                 ScrollListenner(recycleHistoryContact.layoutManager as LinearLayoutManager) {
                 override fun loadMore() {
                     contactsAdapter.currentList.last().message?.time?.let {
+                        isCanLoadMore = true
                         historyContactViewModel.getListContact(
                             it
                         )
@@ -52,26 +54,23 @@ class HistoryContactFragment :
 
     override fun initData() {
         binding.recycleHistoryContact.adapter = contactsAdapter
+        contactsAdapter.submitList(contacts)
+        contactsAdapter.notifyDataSetChanged()
     }
 
     override fun bindData() {
         historyContactViewModel.contacts.observe(this) { data ->
-
-            var haveUpdate = false
-            if (data.isNotEmpty() && contacts.isNotEmpty()) {
-                for (i in 0 until contacts.size) {
-                    if (contacts[i].id == data[0].id) {
-                        contacts.removeAt(i)
-                        contacts.add(0, data[0])
-                        haveUpdate = true
-                    }
-                }
-            }
-            if (!haveUpdate) contacts.addAll(data)
+            if (!isCanLoadMore) contacts.clear()
+            contacts.addAll(data)
+            isCanLoadMore = false
             if (data.size < NumberConstant.ITEM_PER_PAGE) {
                 isEndPage = true
                 contactsAdapter.haveNextPage = false
+            } else {
+                isEndPage = false
+                contactsAdapter.haveNextPage = true
             }
+
             binding.apply {
                 progressLoading.isVisible = false
                 contactsAdapter.submitList(contacts)

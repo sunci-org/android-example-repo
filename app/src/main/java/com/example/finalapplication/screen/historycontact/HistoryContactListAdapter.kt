@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.finalapplication.data.model.Contact
 import com.example.finalapplication.data.model.Message
+import com.example.finalapplication.data.model.User
 import com.example.finalapplication.databinding.ItemContactBinding
 import com.example.finalapplication.databinding.ItemLoadMoreBinding
 import com.example.finalapplication.screen.search.SearchListAdapter
@@ -15,7 +16,9 @@ import com.example.finalapplication.utils.base.BaseViewHolder
 import com.example.finalapplication.utils.loadImageByUrl
 import com.example.finalapplication.utils.toDateString
 
-class HistoryContactListAdapter(private val itemClickListener: ItemRecyclerViewListenner<Contact>) :
+class HistoryContactListAdapter(
+    private val itemClickListener: ItemRecyclerViewListenner<Contact>
+) :
     ListAdapter<Contact, BaseViewHolder<Any>>(Contact.diffCallback) {
 
     var haveNextPage = true
@@ -62,12 +65,18 @@ class HistoryContactListAdapter(private val itemClickListener: ItemRecyclerViewL
                     itemClickListener.onItemClick(contact)
                 }
                 circleAvatar.loadImageByUrl(contact.adversaryUser?.avatar, binding.root.context)
-                if (contact.message?.seen == false) {
+                if (contact.message?.seen == false && contact.uid == contact.message?.reciverId) {
                     textUsername.setTextColor(Color.BLACK)
                     textUsername.setTypeface(null, Typeface.BOLD)
                     textMessage.setTextColor(Color.BLACK)
                     textMessage.setTypeface(null, Typeface.BOLD)
                     textTime.setTypeface(null, Typeface.BOLD)
+                } else {
+                    textUsername.setTextColor(Color.GRAY)
+                    textUsername.setTypeface(null, Typeface.NORMAL)
+                    textMessage.setTextColor(Color.GRAY)
+                    textMessage.setTypeface(null, Typeface.NORMAL)
+                    textTime.setTypeface(null, Typeface.NORMAL)
                 }
                 textUsername.text = contact.adversaryUser?.name
                 textTime.text = contact.message?.time?.toDateString().toString()

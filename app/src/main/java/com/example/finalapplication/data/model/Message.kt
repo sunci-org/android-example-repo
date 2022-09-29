@@ -17,6 +17,7 @@ class Message() : Parcelable {
     var senderId: String? = null
     var reciverId: String? = null
     var seen: Boolean = false
+    var roomId: String? = null
 
     constructor(
         id: String,
@@ -34,7 +35,7 @@ class Message() : Parcelable {
 
     companion object {
         const val messages = "messages"
-        const val reciverId = " reciverId"
+        const val reciverId = "reciverId"
         const val senderId = "senderId"
         const val seen = "seen"
         const val time = "time"
@@ -42,6 +43,7 @@ class Message() : Parcelable {
         const val call = "Cuộc gọi thoại"
         const val video = "Cuộc gọi video"
         const val image = "Hình ảnh"
+        const val roomId = "roomId"
         val diffCallback = object : DiffUtil.ItemCallback<Message>() {
             override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
                 return oldItem.id == newItem.id

@@ -7,5 +7,6 @@ interface ContactDataSource {
         suspend fun getListContact(lastIndex: Long, listen: Listenner<List<Contact>>)
         suspend fun getContact(id: String?, listen: Listenner<Contact>)
         fun addNewContact(contact: Contact)
+        fun updateSeenMessage(id: String?)
     }
 }
