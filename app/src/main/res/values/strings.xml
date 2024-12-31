@@ -4,7 +4,7 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="signup">Sign up</string>
-    <string name="loginwithgoogle">Login with google</string>
+    <string name="loginwithgoogle">Login with google demo</string>
     <string name="createaccount">Create account: </string>
     <string name="changepassword">Change Password</string>
     <string name="cancel">cancel</string>
